@@ -17,6 +17,9 @@ namespace EngineTester
         public double _tempOverheat { get; set; } // Toverheat - overheating temperature (C)
         public double _ratioCooling { get; set; } // C - ratio of cooling effectiveness based on engine temp and environment temp
 
+        public double _torque { get; set; } // m - current torque
+        public double _velocity { get; set; } // v - current velocity
+
         public Engine(double inertia, double tempOverheat, double coolingRatio, double tempEnvinroment)
         {
             _inertia = inertia;
@@ -24,10 +27,14 @@ namespace EngineTester
             _ratioCooling = coolingRatio;
             _tempEnvinroment = tempEnvinroment;
             _tempEngine = _tempEnvinroment;
+            _velocity = 0;
         }
 
-        public abstract void EngineHeatUp();
-        public abstract void EngineCooling();
-        public abstract double Acceleration(); 
+        public abstract double GetTemperatureHeatUp();
+        public abstract double GetTemperatureCooldown();
+        public abstract double Acceleration();
+        public abstract void EngineChangeTemperature();
+
+        public abstract void SimulateSecond();
     }
 }
